@@ -12,12 +12,7 @@ namespace BPP
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            //Added from local
-=======
-            //New thing
-            //Another thing added
->>>>>>> origin/master
+
             double BinCap = 0;
             var dict = InputReader.ReadDataFile(ref BinCap);
 
@@ -57,6 +52,8 @@ namespace BPP
             Console.WriteLine("The objective value is {0}",cplex.GetObjValue());
 
             int piter = 0;
+            int fixediter = 0;
+            Dictionary<string, INumVar> Fixedvar = new Dictionary<string, INumVar>();
             while (true)
             {
                 //Formulate Pricing Problem 
@@ -104,15 +101,42 @@ namespace BPP
                 }
                 else
                 {
-                    break;
+                    fixediter++;
+                    bool fixedsomething = false;
+                    //fix variables above 0.5
+                    foreach( var val in solution)
+                    {
+                        if(val.Value> 0.5 && !Fixedvar.ContainsKey(val.Key))
+                        {
+                            Fixedvar.Add(val.Key, dictvariables[val.Key]);
+                            dictvariables[val.Key].LB = 1;
+                            fixedsomething = true;
+                        }
+                    }
+                    if(!fixedsomething)
+                    {
+                        break;
+                    }
+                    cplex.Solve();
+                    Console.WriteLine("The Fixing iterations is {0}", cplex.GetObjValue());
+                    duals = getDuals(cplex, dictconstraints);
                 }
 
             }
 
+            foreach( var vari in Fixedvar.Values)
+            {
+                vari.LB = 0;
+            }
+            IConversion IP = cplex.Conversion(dictvariables.Values.ToArray(), NumVarType.Int);
+            cplex.Add(IP);
+            cplex.SetParam(Cplex.DoubleParam.TiLim, 600);
+            cplex.Solve();
+
             solution = getSolution(cplex, dictvariables);
             Console.WriteLine("The objective value is {0}", cplex.GetObjValue());
 
-            //Begin Fixing a few variables
+           
 
         }
 
