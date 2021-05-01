@@ -12,7 +12,8 @@ namespace BPP
     {
         static void Main(string[] args)
         {
-            //Comment added from github
+            //New thing
+            //Another thing added
             double BinCap = 0;
             var dict = InputReader.ReadDataFile(ref BinCap);
 
