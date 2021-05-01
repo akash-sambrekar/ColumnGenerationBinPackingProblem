@@ -4,3 +4,5 @@
 4
 4
 3
+#The first line in the text represents the Number of items and the Bin Packing Capacity
+#The following lines represent the weight for each item
