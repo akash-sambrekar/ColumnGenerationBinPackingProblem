@@ -12,7 +12,12 @@ namespace BPP
     {
         static void Main(string[] args)
         {
+<<<<<<< HEAD
             //Added from local
+=======
+            //New thing
+            //Another thing added
+>>>>>>> origin/master
             double BinCap = 0;
             var dict = InputReader.ReadDataFile(ref BinCap);
 
