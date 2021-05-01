@@ -106,7 +106,7 @@ namespace BPP
             solution = getSolution(cplex, dictvariables);
             Console.WriteLine("The objective value is {0}", cplex.GetObjValue());
 
-            //Begin Fixing a few variables 
+            //Begin Fixing a few variables
 
         }
 

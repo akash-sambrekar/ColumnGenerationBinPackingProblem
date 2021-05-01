@@ -11,8 +11,8 @@ namespace BPP
         public static  Dictionary<int,double> ReadDataFile(ref double Bincap)
         {
             Dictionary<int, double> Data = new Dictionary<int, double>();
-            var ReadLines = File.ReadAllLines(@"C:\Users\Akash Sambrekar\source\repos\BPP\bin\Debug\input_data.txt", Encoding.UTF8);
-
+            //var ReadLines = File.ReadAllLines(@"C:\Users\Akash Sambrekar\source\repos\BPP\bin\Debug\input_data.txt", Encoding.UTF8);
+            var ReadLines = File.ReadAllLines(@"C: \Users\Akash Sambrekar\source\repos\BPP\input_data.txt", Encoding.UTF8);     
             var firstline = ReadLines[0].Split(' ').ToArray();
             int num_items = Convert.ToInt32(firstline[0]);
             Bincap = Convert.ToDouble(firstline[1]);
